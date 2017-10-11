@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+		<div class="post">
+			<h1 class="title">History</h1>
+			<p class="byline"><small>Size : <a href="/history?size={{ label_size.0 }}&num={{ conf.small.2 }}">Small</a> | <a href="/history?size={{ label_size.1 }}&num={{ conf.medium.2 }}">Medium</a> | <a href="/history?size={{ label_size.2 }}&num={{ conf.large.2 }}">Large</a></small></p>
+			<div class="entry">
+				<form action="/history" method="post">
+				{% if count %}
+				<input type="submit" name="action" value="Del selected">
+				{% endif %}
+				<table>{% for r in images %}
+				<tr>
+				{% for img in r %}
+					<td>
+					{% if img %}
+					<a href="o/{{ img.key.name }}{{ img.extension }}" rel="lightbox[history]" {% if img.label %}title="{{ img.label }}"{% else %}title=" "{% endif %}><img src="{{ size }}/{{ img.key.name }}{{ img.thumb_extension }}" width="{{ width }}"/></a><br />
+					<input type="checkbox" name="image" id="{{ img.key.name }}" value="{{ img.key.name }}"> | <a href="{{ img.key.name }}">Info</a>
+					</td>
+					{% endif %}
+				{% endfor %}
+				</tr>
+				{% endfor %}</table>
+				{% if count %}
+				<input type="submit" name="action" value="Del selected">
+				{% endif %}
+				</form>
+			</div>
+		</div>
+{% endblock %}

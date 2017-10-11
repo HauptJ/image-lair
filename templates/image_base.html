@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+{% if img and not error %}
+		<div class="post">
+		{% if img.is_url %}
+			<h1 class="title">{{ img.name|urlizetrunc:40 }}</h1>
+		{% else %}
+			<h1 class="title">{{ img.name|escape }}</h1>
+		{% endif %}
+			<p class="byline"><small>{{ img.label|escape }} {% if allow_del %}<a href="/{{ img.key.name }}?del={{ img.del_key }}">Del link</a>{% endif %}</small></p>
+			<div class="entry">
+		
+		<h3>This image has been scaled. Click on it to show it in the original size.</h3>
+		<a href="o/{{ img.key.name }}{{ img.extension }}" rel="lightbox" {% if img.label %}title="{{ img.label }}"{% else %}title=" "{% endif %}><img src="l/{{ img.key.name }}{{ img.thumb_extension }}" /></a>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-2107616718440040";
+		/* Image Lair banner */
+		google_ad_slot = "0783923401";
+		google_ad_width = 468;
+		google_ad_height = 60;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		{% block links %}
+		<br /><br />
+		<h3>Image links</h3>
+		<table>
+			<tr>
+				<td>Image | <a href="{{ host }}/o/{{ img.key.name }}{{ img.extension }}" target="_blank">View</a></td>
+				<td><input type="text" value="{{ host }}/o/{{ img.key.name }}{{ img.extension }}" size="100" onclick="javascript:selectText(this);" /></td>
+			</tr>
+			<tr>
+				<td>Image (Image Lair)</td>
+				<td><input type="text" value="{{ host }}/{{ img.key.name }}" size="100" onclick="javascript:selectText(this);" /></td>
+			</tr>
+		</table>
+		<br />
+		<h3>Forum links</h3>
+		<table>
+			<tr>
+				<td>Image (original)</td>
+				<td><input type="text" value="[url={{ host }}/{{ img.key.name }}][img]{{ host }}/o/{{ img.key.name }}{{ img.extension }}[/img][/url]" size="100" onclick="javascript:selectText(this);" /></td>
+			</tr>
+			<tr>
+				<td>Small ({{ size.small.0 }} px)</td>
+				<td><input type="text" value="[url={{ host }}/{{ img.key.name }}][img]{{ host }}/s/{{ img.key.name }}{{ img.thumb_extension }}[/img][/url]" size="100" onclick="javascript:selectText(this);" /></td>
+			</tr>
+			<tr>
+				<td>Medium ({{ size.medium.0 }} px)</td>
+				<td><input type="text" value="[url={{ host }}/{{ img.key.name }}][img]{{ host }}/m/{{ img.key.name }}{{ img.thumb_extension }}[/img][/url]" size="100" onclick="javascript:selectText(this);" /></td>
+			</tr>
+			<tr>
+				<td>Large ({{ size.large.0 }} px)</td>
+				<td><input type="text" value="[url={{ host }}/{{ img.key.name }}][img]{{ host }}/l/{{ img.key.name }}{{ img.thumb_extension }}[/img][/url]" size="100" onclick="javascript:selectText(this);" /></td>
+			</tr>
+			<tr>
+				<td>HTML ({{ size.small.0 }} px)</td>
+				<td><input type="text" value='<a href="{{ host }}/{{ img.key.name }}" target="_blank"><img src="{{ host }}/s/{{ img.key.name }}{{ img.thumb_extension }}" border="0"/></a>' size="100" onclick="javascript:selectText(this);" /></td>
+			</tr>
+		</table>
+		<br />
+		<table>
+			<tr>
+				<td><strong>Small</strong></td>
+				<td><a href="s/{{ img.key.name }}{{ img.thumb_extension }}" target="_blank"><img src="s/{{ img.key.name }}{{ img.thumb_extension }}" /></a></td>
+			</tr>
+			<tr>
+				<td><strong>Medium</strong></td>
+				<td><a href="m/{{ img.key.name }}{{ img.thumb_extension }}" target="_blank"><img src="m/{{ img.key.name }}{{ img.thumb_extension }}" /></a></td>
+			</tr>
+			<tr>
+				<td><strong>Large</strong></td>
+				<td><a href="l/{{ img.key.name }}{{ img.thumb_extension }}" target="_blank"><img src="l/{{ img.key.name }}{{ img.thumb_extension }}" /></a></td>
+			</tr>
+		</table>
+		{% endblock %}
+		</div>
+	</div>
+{% endif %}
+{% endblock %}
+

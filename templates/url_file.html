@@ -1,0 +1,30 @@
+{% extends "index_base.html" %}
+{% block upload %}
+		<div class="post">
+			<h1 class="title">Upload your picture</h1>
+			<p class="byline"><small>Max size 1 MB [jpeg, png, gif (including animated gif), bmp, tiff and ico]</small></p>
+			<div class="entry">
+				<br />
+				<form action="/" method="post">
+					<table>
+						<tr>
+							<td></td>
+							<td><small>Select an image from<input type="radio" name="method" id="radiofile" onclick="javascript:window.location.href='?method=file'"><label for="radiofile">a File</label><input type="radio" name="method" id="radiourl" checked="checked"><label for="radiourl">an URL</label></small></td>
+						</tr>
+		    			<tr>
+		    				<td align="right"><label>Url: </label></td>
+		    				<td><input name="url" type="text" size="50" value="http://"></td>
+		    			</tr>
+		    			<tr>
+		    				<td align="right"><label>Label: </label></td>
+		    				<td><input name="label" type="text" size="50"></td>
+		    			</tr>
+		    			<tr>
+		    				<td></td>
+		    				<td><input type="submit"></td>
+		    			</tr>
+		    		</table>
+				</form>
+			</div>
+		</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+		<div class="post">
+			<h1 class="title">Add new authorized users</h1>
+			<p class="byline"><small>For private use</small></p>
+			<div class="entry">
+				<form action="/settings" method="post"> 
+				<table>
+					<tr>
+						<td><label for="newemail">New user (e-mail)</label></td>
+						<td><input type="text" name="newemail" id="newemail" size="30"></td>
+						<td><input type="submit" name="action" id="newuser" value="Add"></td>
+						<td>{{ message }}</td>
+					</tr>
+					{% for account in accounts %}
+					<tr>
+						<td align="right"><input type="checkbox" name="email" id="{{ account.key }}" value="{{ account.key }}"></td>
+						<td><label for="{{ account.key }}">{{ account.user.email }}</label></td>
+					</tr>
+					{% if forloop.last %}
+					<tr>
+						<td align="right"><input type="submit" name="action" id="deluser" value="Del"><td>
+					</tr>
+					{% endif %}
+					{% endfor %}	
+				</table>
+				</form>
+			</div>
+		</div>
+{% endblock %}
