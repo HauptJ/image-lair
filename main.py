@@ -76,9 +76,10 @@ class BaseRequestHandler(webapp.RequestHandler):
         html = template.render(path, values, debug=_DEBUG)
         self.response.out.write(html)
 
+	# used GAE user API https://cloud.google.com/appengine/docs/standard/python/refdocs/google.appengine.api.users	
     def is_authorized(self):
-        if config.is_private and not users.is_current_user_admin():
-            user = users.get_current_user()
+        if config.is_private and not users.is_current_user_admin(): # good user API
+            user = users.get_current_user() # good user API
             if not user or not is_user_account_exist(user):
                 return False
         return True
@@ -340,6 +341,7 @@ class Admin(BaseRequestHandler):
                 self.response.out.write('Image deleted : %s | %s | %s | %s | %s<br />\n' % (im.name, im.key().name(), im.length, im.type, im.owner))
                 im.delete()
 
+# check if user account exists
 def is_user_account_exist(current_user):
     accounts = Account.all()
     accounts.filter('user = ', current_user)
@@ -354,6 +356,7 @@ def get_image(key):
         memcache.add(key, img)
         return img
 
+# get Google Account user info from user API
 def get_user_info():
     user = users.get_current_user()
         
@@ -361,9 +364,9 @@ def get_user_info():
         sign_url = users.create_logout_url('/')
         sign_label = 'Sign out'
         user_name = users.get_current_user().email()
-        is_admin = users.is_current_user_admin()
+        is_admin = users.is_current_user_admin() # good user API
     else:
-        sign_url = users.create_login_url('/')
+        sign_url = users.create_login_url('/') # good user API
         sign_label = 'Sign in'
         user_name = ''
         is_admin = False
